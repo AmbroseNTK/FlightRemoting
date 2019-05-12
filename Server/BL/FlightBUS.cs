@@ -9,7 +9,7 @@ using SharedLibrary;
 
 namespace Server.BL
 {
-    class FlightBUS : MarshalByRefObject, IFlightBUS
+    public class FlightBUS : MarshalByRefObject, IFlightBUS
     {
         private FlightDAO flightDAO;
 

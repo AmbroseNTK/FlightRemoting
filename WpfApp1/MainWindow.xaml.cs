@@ -35,7 +35,7 @@ namespace WpfApp1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TcpClientChannel clientChannel = new TcpClientChannel();
-            ChannelServices.RegisterChannel(clientChannel, true);
+            ChannelServices.RegisterChannel(clientChannel, false);
             flightBUS = (IFlightBUS)Activator.GetObject(typeof(IFlightBUS), "tcp://"+Config.AppServerIP+"/FlightBUS");
            
         }

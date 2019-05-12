@@ -17,7 +17,7 @@ namespace Server
             try
             {
                 TcpServerChannel serverChannel = new TcpServerChannel(2303);
-                ChannelServices.RegisterChannel(serverChannel, true);
+                ChannelServices.RegisterChannel(serverChannel, false);
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(BL.FlightBUS), "FlightBUS", WellKnownObjectMode.SingleCall);
                 Console.WriteLine("Server is running");
             }
