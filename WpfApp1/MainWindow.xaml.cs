@@ -19,6 +19,8 @@ using System.Runtime.Remoting.Channels.Tcp;
 
 using SharedLibrary;
 
+using WpfApp1.FlightSOAP;
+
 namespace WpfApp1
 {
     /// <summary>
@@ -32,12 +34,11 @@ namespace WpfApp1
             InitializeComponent();
         }
         private IFlightBUS flightBUS;
+        FlightSOAP.FlightServiceSoapClient flightService;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            TcpClientChannel clientChannel = new TcpClientChannel();
-            ChannelServices.RegisterChannel(clientChannel, false);
-            flightBUS = (IFlightBUS)Activator.GetObject(typeof(IFlightBUS), "tcp://"+Config.AppServerIP+"/FlightBUS");
-           
+            flightService = new FlightServiceSoapClient();
+            flightService.Open();
         }
         private void TbTime_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -64,7 +65,15 @@ namespace WpfApp1
         {
             try
             {
-                gridData.ItemsSource = flightBUS.SelectAll();
+                if (flightService.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    gridData.ItemsSource = flightService.SelectAll();
+                    gridData.Columns.RemoveAt(0);   
+                }
+                else
+                {
+                    MessageBox.Show("SOAP is opening");
+                }
             }
             catch(Exception ex)
             {
@@ -72,7 +81,7 @@ namespace WpfApp1
             }
         }
 
-        private Flight GetFlightFromFields(bool hasID = false)
+        private FlightSOAP.Flight GetFlightFromFields(bool hasID = false)
         {
             string date = "";
             if (pickerDate.SelectedDate != null)
@@ -84,8 +93,8 @@ namespace WpfApp1
                 date = month + "/" + day + "/" + pickerDate.SelectedDate.Value.Year;
 
             }
-            
-            Flight flight = new Flight()
+
+            FlightSOAP.Flight flight = new FlightSOAP.Flight()
             {
                 Code = tbCode.Text,
                 ArrivalAirport = tbAA.Text,
@@ -106,7 +115,7 @@ namespace WpfApp1
         {
             try
             {
-                Flight flight = this.gridData.SelectedItem as Flight;
+                FlightSOAP.Flight flight = this.gridData.SelectedItem as FlightSOAP.Flight;
                 if (flight != null)
                 {
                     tbID.Text = flight.ID.ToString();
@@ -130,8 +139,9 @@ namespace WpfApp1
         {
             try
             {
-                flightBUS.Insert(GetFlightFromFields());
-                gridData.ItemsSource = flightBUS.SelectAll();
+                flightService.Insert(GetFlightFromFields());
+                gridData.ItemsSource = flightService.SelectAll();
+                gridData.Columns.RemoveAt(0);
             }
             catch (Exception ex)
             {
@@ -143,8 +153,9 @@ namespace WpfApp1
         {
             try
             {
-                flightBUS.Update(GetFlightFromFields(true));
-                gridData.ItemsSource = flightBUS.SelectAll();
+                flightService.Update(GetFlightFromFields(true));
+                gridData.ItemsSource = flightService.SelectAll();
+                gridData.Columns.RemoveAt(0);
             }
             catch (Exception ex)
             {
@@ -159,8 +170,9 @@ namespace WpfApp1
             {
                 try
                 {
-                    flightBUS.Delete(int.Parse(tbID.Text));
-                    gridData.ItemsSource = flightBUS.SelectAll();
+                    flightService.Delete(int.Parse(tbID.Text));
+                    gridData.ItemsSource = flightService.SelectAll();
+                    gridData.Columns.RemoveAt(0);
                 }
                 catch (Exception ex)
                 {

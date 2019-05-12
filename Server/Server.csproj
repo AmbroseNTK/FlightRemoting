@@ -134,11 +134,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj">
-      <Project>{f2eb1ecb-d2e5-41c5-a9b4-075266894ea0}</Project>
-      <Name>SharedLibrary</Name>
+    <ProjectReference Include="..\CommonObjects\CommonObjects.csproj">
+      <Project>{02cf84bd-6313-4acf-807e-d53a9bb15b80}</Project>
+      <Name>CommonObjects</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

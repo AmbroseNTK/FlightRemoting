@@ -166,18 +166,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonObjects\CommonObjects.csproj">
+      <Project>{02cf84bd-6313-4acf-807e-d53a9bb15b80}</Project>
+      <Name>CommonObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Server\Server.csproj">
       <Project>{98aa2086-9674-424a-bf52-9291109221b9}</Project>
       <Name>Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj">
-      <Project>{f2eb1ecb-d2e5-41c5-a9b4-075266894ea0}</Project>
-      <Name>SharedLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
