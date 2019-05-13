@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationSOAPService", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonObjects", "CommonObjects\CommonObjects.csproj", "{02CF84BD-6313-4ACF-807E-D53A9BB15B80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationRESTfulAPIs", "ApplicationRESTfulAPIs\ApplicationRESTfulAPIs.csproj", "{BA6B2823-A914-4E87-A55E-497FC3A4411B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{02CF84BD-6313-4ACF-807E-D53A9BB15B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02CF84BD-6313-4ACF-807E-D53A9BB15B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02CF84BD-6313-4ACF-807E-D53A9BB15B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA6B2823-A914-4E87-A55E-497FC3A4411B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA6B2823-A914-4E87-A55E-497FC3A4411B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA6B2823-A914-4E87-A55E-497FC3A4411B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA6B2823-A914-4E87-A55E-497FC3A4411B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
