@@ -20,6 +20,7 @@ using System.Runtime.Remoting.Channels.Tcp;
 using SharedLibrary;
 
 using WpfApp1.FlightSOAP;
+using System.Net;
 
 namespace WpfApp1
 {
@@ -33,12 +34,12 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-        private IFlightBUS flightBUS;
-        FlightSOAP.FlightServiceSoapClient flightService;
+        WebClient client;
+        FlightServiceSoapClient flightService;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            flightService = new FlightServiceSoapClient();
-            flightService.Open();
+            client = new WebClient();
+            
         }
         private void TbTime_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -65,17 +66,12 @@ namespace WpfApp1
         {
             try
             {
-                if (flightService.State == System.ServiceModel.CommunicationState.Opened)
-                {
-                    gridData.ItemsSource = flightService.SelectAll();
-                    gridData.Columns.RemoveAt(0);   
-                }
-                else
-                {
-                    MessageBox.Show("SOAP is opening");
-                }
+
+                gridData.ItemsSource = flightService.SelectAll();
+                gridData.Columns.RemoveAt(0);
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, ex.Source, MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -195,7 +191,7 @@ namespace WpfApp1
         {
             try
             {
-                gridData.ItemsSource = flightBUS.Search(tbSearch.Text);
+                gridData.ItemsSource = flightService.Search(tbSearch.Text);
             }
             catch (Exception ex)
             {
