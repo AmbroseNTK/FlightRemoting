@@ -195,7 +195,9 @@ namespace WpfApp1
         {
             try
             {
-                gridData.ItemsSource = flightBUS.Search(tbSearch.Text);
+                gridData.ItemsSource = flightService.Search(tbSearch.Text);
+                gridData.Columns.RemoveAt(0);
+
             }
             catch (Exception ex)
             {
